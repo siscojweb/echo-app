@@ -1,4 +1,4 @@
-appName = "tbernardo-echo-app"
+appName = "afreitas-echo-app"
 appServiceName = "api"
 dbName = "my-echodb"
 dbAdmin = "dbadmin"
