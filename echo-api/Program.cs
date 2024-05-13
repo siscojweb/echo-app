@@ -47,6 +47,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+
 // app.MapGet("/echo/{message}", (string message) =>
 // {
 //     string logMessage = string.Format("Echoing message: {0}", message);
