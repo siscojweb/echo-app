@@ -2,10 +2,6 @@ using System.Net;
 using echo_api.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging.Console;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
-using Microsoft.FeatureManagement;
 
 var builder = WebApplication.CreateBuilder(args);
 var configuration = builder.Configuration;
@@ -35,8 +31,6 @@ var app = builder.Build();
 
 app.UseCors("CorsPolicy");
 
-app.UseAzureAppConfiguration();
-
 using (var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<EchoHistoryDb>())
 {
     if (context.Database.IsNpgsql())
@@ -52,6 +46,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
 
 // app.MapGet("/echo/{message}", (string message) =>
 // {
@@ -87,4 +82,3 @@ app.MapGet("/logs", (EchoHistoryDb db) =>
 .WithName("GetLog");
 
 app.Run();
-
