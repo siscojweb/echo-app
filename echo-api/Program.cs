@@ -83,3 +83,4 @@ app.MapGet("/logs", (EchoHistoryDb db) =>
 .WithName("GetLog");
 
 app.Run();
+
