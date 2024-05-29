@@ -31,6 +31,8 @@ var app = builder.Build();
 
 app.UseCors("CorsPolicy");
 
+app.UseAzureAppConfiguration();
+
 using (var context = app.Services.CreateScope().ServiceProvider.GetRequiredService<EchoHistoryDb>())
 {
     if (context.Database.IsNpgsql())
