@@ -1,4 +1,6 @@
 using Microsoft.Extensions.Logging.Console;
+using Microsoft.FeatureManagement;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,6 +22,19 @@ builder.Services.AddCors(options =>
             .AllowAnyMethod()
             .AllowAnyHeader());
     });
+
+// Add Azure App Configuration middleware to the container of services.
+builder.Services.AddAzureAppConfiguration();
+// Add feature management to the container of services.
+builder.Services.AddFeatureManagement();
+
+// Load configuration from Azure App Configuration
+builder.Configuration.AddAzureAppConfiguration(options =>
+{
+    options.Connect(builder.Configuration["AppConfigConnString"]);
+    // Load all feature flags with no label
+    options.UseFeatureFlags();
+});
 
 var app = builder.Build();
 
